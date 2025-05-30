@@ -23,3 +23,22 @@ Before any organization could mine the moon for a certain material, they will ne
 ## Disclaimer
 
 **This project is for educational purposes only, it currently only serves as a proof of concept. If your organization happened to be preparing for a moon mining operation (I know... just putting it out there anyway...), this is not a reliable source to estimate the lunar composition.**
+
+microperceptron@mvpp-edge:~ $ cat /etc/systemd/system/openems.service
+[Unit]
+Description=OpenEMS Edge
+After=network.target
+
+[Service]
+User=root
+Group=root
+Type=notify
+WorkingDirectory=/usr/lib/openems
+ExecStart=/usr/bin/java -Dfelix.cm.dir=/etc/openems.d/ -jar /usr/lib/openems/openems.jar
+SuccessExitStatus=143
+Restart=always
+RestartSec=10
+WatchdogSec=60
+
+[Install]
+WantedBy=multi-user.target
